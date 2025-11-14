@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Three Months</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+
+  <h1>HAPPY THREE MONTHS</h1>
+
+  <div class="heart-section">
+    <!-- Four photos around the heart -->
+    <div class="photo photo-top-left">
+      <img src="./assets/1e52515a-a30d-4bb0-830e-576e2d496c8b.jpg" alt="Photo 1">
+    </div>
+    <div class="photo photo-top-right">
+      <img src="./assets/62b5b4d3-b345-4dd6-b5e5-5061a9a8f4de.jpg" alt="Photo 2">
+    </div>
+    <div class="photo photo-bottom-left">
+      <img src="./assets/d6c9d486-517c-40bf-b507-df704c87830a.jpg" alt="Photo 3">
+    </div>
+    <div class="photo photo-bottom-right">
+      <img src="./assets/ecd47bf4-a2a6-456d-967f-9ba209919833.jpg" alt="Photo 4">
+    </div>
+
+    <!-- Click button in the middle -->
+    <button class="click-me" id="openModalBtn">
+      CLICK ME
+    </button>
+
+    <!-- Modal (appears when CLICK ME pressed) -->
+    <div class="overlay" id="modalOverlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="close" id="modalClose" aria-label="Close">&times;</button>
+        <h2 id="modalTitle">A special message</h2>
+        <p id="modalText">Happy three months! I love you. You make me so happy every day.</p>
+      </div>
+    </div>
+
+    <!-- Animated text heart, JS will fill this -->
+    <div id="ui"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+  overflow: hidden;
+}
+
+h1 {
+  margin: 0 0 25px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  text-transform: uppercase;
+  text-align: center;
+  color: #ff9adf;
+  text-shadow: 0 0 10px #ff4fbd;
+}
+
+.heart-section {
+  position: relative;
+  width: min(700px, 95vw);
+  height: min(700px, 95vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Heart container */
+#ui {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  transform: translateX(-2rem);
+  z-index: 5;
+}
+
+#ui .love {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -225px 0 0 -225px;
+  --i: 0;
+}
+
+#ui .love_word {
+  color: #ea80b0;
+  font-size: 0.8rem;
+  transform: translateY(-100%) rotateZ(-30deg);
+  text-shadow: 0 0 10px #ffc8ff;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+#ui .love_horizontal {
+  animation: horizontal 10000ms infinite alternate ease-in-out;
+  animation-delay: calc(var(--i) * -0.18s);
+}
+
+#ui .love_vertical {
+  animation: vertical 20000ms infinite linear;
+  animation-delay: calc(var(--i) * -0.18s);
+}
+
+@keyframes horizontal {
+  from { transform: translateX(0px); }
+  to   { transform: translateX(450px); }
+}
+
+/* Heart path */
+@keyframes vertical {
+  0%   { transform: translateY(180px); }
+  10%  { transform: translateY(45px); }
+  15%  { transform: translateY(4.5px); }
+  18%  { transform: translateY(0px); }
+  20%  { transform: translateY(4.5px); }
+  22%  { transform: translateY(34.6px); }
+  24%  { transform: translateY(64.3px); }
+  25%  { transform: translateY(112.5px); }
+  26%  { transform: translateY(64.3px); }
+  28%  { transform: translateY(34.6px); }
+  30%  { transform: translateY(4.5px); }
+  32%  { transform: translateY(0px); }
+  35%  { transform: translateY(4.5px); }
+  40%  { transform: translateY(45px); }
+  50%  { transform: translateY(180px); }
+  71%  { transform: translateY(428.6px); }
+  72.5%{ transform: translateY(441.2px); }
+  75%  { transform: translateY(450px); }
+  77.5%{ transform: translateY(441.2px); }
+  79%  { transform: translateY(428.6px); }
+  100% { transform: translateY(180px); }
+}
+
+/* Photos around the heart */
+.photo {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 2; /* behind the heart */
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-top-left    { top: 12px;  left: 12px;  }
+.photo-top-right   { top: 12px;  right: 12px; }
+.photo-bottom-left { bottom: 12px; left: 12px;  }
+.photo-bottom-right{ bottom: 12px; right: 12px; }
+
+/* "Click me" button in the middle */
+.click-me {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 2px solid #ff9adf;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffe9ff;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  z-index: 20;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 154, 223, 0.9);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 0 25px 10px rgba(255, 154, 223, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 154, 223, 0);
+  }
+}
+
+/* Modal / overlay styles */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  padding: 20px;
+}
+.overlay.show { display: flex; }
+
+.modal {
+  background: #111;
+  border-radius: 10px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  padding: 20px 24px;
+  font-family: 'Dosis', sans-serif;
+  color: #ffeef7;
+  position: relative;
+  border: 1px solid rgba(255,154,223,0.08);
+}
+
+.modal .close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* small responsive tweak */
+@media (max-width: 420px) {
+  .modal { padding: 16px; }
+  .photo { width: 110px; height: 110px; }
+}
+
+@media (max-width: 600px) {
+  .photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* keep the heart reasonably sized on small screens */
+  #ui {
+    width: 300px;
+    height: 300px;
+  }
+}
