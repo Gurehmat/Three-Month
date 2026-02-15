@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Six Months</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body class="story-mode">
+
+  <!-- Audio Element -->
+  <audio id="bg-music" loop>
+    <source src="./assets/Malcolm_Todd_-_Roommates_(Lyrics)_128k.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Back Button to 3 Month Page -->
+  <a href="index.html" class="back-home-btn">&larr; Back to 3 Months</a>
+
+  <!-- Music Toggle Button -->
+  <button id="music-toggle" class="music-btn">🎵 Play Music</button>
+
+  <div id="story-container">
+    <!-- Step 1: Video -->
+    <div class="story-step active" id="step-1">
+      <div class="video-wrapper">
+        <!-- Placeholder for video. User needs to replace 'video.mp4' -->
+        <video controls poster="./assets/WhatsApp Video 2026-02-15 at 5.25.43 PM.mp4">
+            <source src="./assets/WhatsApp Video 2026-02-15 at 5.25.43 PM.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p class="caption">Running with my valentine ❤️</p>
+      </div>
+    </div>
+
+    <!-- Step 2: Text -->
+    <div class="story-step" id="step-2">
+      <div class="text-card">
+        <p>Happy six months my love. I love you so much.</p>
+        <p>These last six months have gone by so fast.</p>
+      </div>
+    </div>
+
+    <!-- Step 3: Sleep Photo (Placeholder) -->
+    <div class="story-step" id="step-3">
+      <div class="photo-card">
+        <!-- User to replace src with 'sleep-photo.jpg' or similar -->
+        <img src="./assets/sleep.png" alt="Sleep Photo">
+        <p class="caption">So many nights and memories with you ❤️</p>
+      </div>
+    </div>
+
+    <!-- Step 4: More Text -->
+    <div class="story-step" id="step-4">
+      <div class="text-card">
+        <p>I can't wait for everything still ahead of us.</p>
+        <p>Remember that I'm here to support you through everything baby.</p>
+      </div>
+    </div>
+
+    <!-- Step 5: AAA Photo (Placeholder) -->
+    <div class="story-step" id="step-5">
+      <div class="photo-card">
+        <!-- User to replace src with 'aaa-photo.jpg' or similar -->
+        <img src="./assets/AAA.png" alt="AAA Photo">
+        <p class="caption">Making memories with you is my favorite thing.</p>
+      </div>
+    </div>
+
+    <!-- Step 6: Final Card -->
+    <div class="story-step" id="step-6">
+      <div class="final-card">
+        <h1>I LOVE YOU</h1>
+        <p>I can't wait for everything still ahead of us, every valentine, every anniversary, every moment with you. <br> I love you so much baby.</p>
+      </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation-controls">
+      <button id="next-btn" class="nav-arrow">
+         Next &rarr;
+      </button>
+    </div>
+    
+    <!-- Container for the final heart animation -->
+    <div id="final-heart-container"></div>
+  </div>
+
+  <script>
+    // --- Story Logic ---
+    let currentStep = 1;
+    const totalSteps = 6;
+    const nextBtn = document.getElementById('next-btn');
+
+    nextBtn.addEventListener('click', () => {
+      // Hide current step
+      document.getElementById(`step-${currentStep}`).classList.remove('active');
+      
+      // Increment step
+      currentStep++;
+      
+      if (currentStep <= totalSteps) {
+        // Show next step
+        document.getElementById(`step-${currentStep}`).classList.add('active');
+        
+        // Hide button on last step
+        if (currentStep === totalSteps) {
+          nextBtn.style.display = 'none'; // End of story
+          // Trigger the final animation
+          setTimeout(createHeartAnimation, 500);
+        }
+      }
+    });
+
+    function createHeartAnimation() {
+      const container = document.getElementById('final-heart-container');
+      const particleCount = 80; // Denser heart
+      
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const scale = 14; 
+
+      for (let i = 0; i < particleCount; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart-particle');
+        heart.innerHTML = '❤️';
+        
+        // 1. Start at random positions
+        const randomX = Math.random() * window.innerWidth;
+        const randomY = Math.random() * window.innerHeight;
+        
+        heart.style.left = `${randomX}px`;
+        heart.style.top = `${randomY}px`;
+        
+        container.appendChild(heart);
+
+        // 2. Transition to heart shape
+        const t = (Math.PI * 2 * i) / particleCount;
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+        
+        const finalX = centerX + (x * scale);
+        const finalY = centerY + (y * scale);
+
+        // Small delay to ensure CSS transition picks up the start position first
+        setTimeout(() => {
+          heart.style.left = `${finalX}px`;
+          heart.style.top = `${finalY}px`;
+          heart.style.opacity = '1';
+
+          // 3. Add pulsing effect after they arrive (velocity is ~2s)
+          setTimeout(() => {
+            heart.classList.add('pulsing-heart');
+          }, 2000);
+        }, 100);
+      }
+    }
+
+    // --- Music Logic ---
+    const bgMusic = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-toggle');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.textContent = '🎵 Play Music';
+        isPlaying = false;
+      } else {
+        bgMusic.play().then(() => {
+          musicBtn.textContent = '⏸ Pause Music';
+          isPlaying = true;
+        }).catch(err => {
+          console.log("Autoplay prevented:", err);
+        });
+      }
+    }
+
+    musicBtn.addEventListener('click', toggleMusic);
+
+    // Try to auto-play on first interaction if not already playing
+    document.body.addEventListener('click', () => {
+      if (!isPlaying) {
+        bgMusic.play().then(() => {
+          musicBtn.textContent = '⏸ Pause Music';
+          isPlaying = true;
+        }).catch(() => {});
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>
