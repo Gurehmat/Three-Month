@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2b1218">
+  <title>Happy One Year</title>
+  <link rel="stylesheet" href="one-year.css">
+</head>
+<body>
+  <audio id="our-song" loop preload="metadata">
+    <source src="./assets/Get You (feat. Kali Uchis).mp3" type="audio/mpeg">
+  </audio>
+
+  <header class="top-bar">
+    <a href="six-month.html" class="back-link" aria-label="Back to the six month page">&#8592; six months</a>
+    <button id="music-button" class="music-button" type="button" aria-pressed="false">
+      <span class="music-dot" aria-hidden="true"></span>
+      <span id="music-label">play song</span>
+    </button>
+  </header>
+
+  <main class="book-area">
+    <div class="book-shadow" aria-hidden="true"></div>
+    <div class="book" id="book" aria-live="polite">
+      <section class="page cover-page is-active" data-page="0" aria-label="Book cover">
+        <span class="cover-stitch" aria-hidden="true"></span>
+        <p class="tiny-type">365 days / one whole year</p>
+        <div class="cover-photo polaroid">
+          <img src="./assets/1yrpromgun.png" alt="Us dressed up together at prom">
+          <span>look at us :)</span>
+        </div>
+        <div class="cover-title">
+          <p>happy</p>
+          <h1>one year</h1>
+          <span>baby &#9825;</span>
+        </div>
+        <p class="cover-corner">I made you a little something</p>
+      </section>
+
+      <section class="page paper-page first-page" data-page="1" aria-label="One whole year">
+        <div class="page-number">01</div>
+        <p class="scribble top-scribble">wait... a whole year??</p>
+        <h2>one whole year,<br><em>somehow.</em></h2>
+        <p class="body-note">It went by ridiculously fast, but we also somehow fit so much into it.</p>
+
+        <div class="mini-collage">
+          <figure class="polaroid photo-left">
+            <img src="./assets/1yrphotobook.png" alt="Our photo booth pictures together">
+            <span>"hmph oni-chan 🥺👉👈"</span>
+          </figure>
+          <figure class="polaroid photo-right">
+            <img src="./assets/1yrpullup.png" alt="Us playing together at the park">
+            <span>PULLUPSSS</span>
+          </figure>
+          <span class="tape tape-a" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <section class="page paper-page list-page" data-page="2" aria-label="Things I love about us">
+        <div class="page-number">02</div>
+        <p class="small-heading">things I never get tired of:</p>
+        <ul class="love-list">
+          <li><span>&#10003;</span> hearing your laugh</li>
+          <li><span>&#10003;</span> doing literally nothing together</li>
+          <li><span>&#10003;</span> our very questionable pictures</li>
+          <li><span>&#10003;</span> waking up next to you</li>
+          <li><span>&#10003;</span> my beautiful girlfriend Trisha.</li>
+        </ul>
+
+        <figure class="polaroid list-photo">
+          <img src="./assets/1yrgoofy.png" alt="Us making silly faces together">
+          <span>exhibit A</span>
+        </figure>
+        <p class="scribble list-scribble">one of my favourite photos btw</p>
+        <span class="tape tape-b" aria-hidden="true"></span>
+      </section>
+
+      <section class="page dark-page video-page" data-page="3" aria-label="A favorite video">
+        <div class="page-number light">03</div>
+        <p class="small-heading light-text">this one still makes me smile</p>
+        <div class="video-frame">
+          <video controls playsinline preload="metadata">
+            <source src="./assets/1yremo.mp4" type="video/mp4">
+            Your browser does not support video.
+          </video>
+        </div>
+        <p class="video-caption">my emo girl🖤️🕸️&#9825;</p>
+        <p class="video-note">I would replay every day with you if I could.</p>
+        <div class="little-stars" aria-hidden="true">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+      </section>
+
+      <section class="page letter-page" data-page="4" aria-label="A letter for you">
+        <div class="page-number">04</div>
+        <p class="letter-heading">okay, serious for a second.</p>
+        <div class="letter-copy">
+          <p>Happy one year anniversary baby.</p>
+          <p>I actually cannot believe it has already been a year. I love all the memories we have, every single laugh and cute giggle, every pre fart lock in, and every time we looked deeply into each other's eyes and fell a little bit more in love. </p>
+          <p>Thank you for being the person I can be stupid with, fall asleep beside, and tell everything to. You've given me the space to start opening up about things I thought I would die with and I can't begin to describe how special you are to me. </p>
+          <p>I know that this next year will be filled with so many surprises and new experiences, and I can't wait to have them with you.</p>
+          <p>I love you. A lot. Like, a insane amount.</p>
+        </div>
+        <p class="letter-signoff">your kawaii cutie princess &#9825;</p>
+        <span class="coffee-ring" aria-hidden="true"></span>
+      </section>
+
+      <section class="page final-page" data-page="5" aria-label="Happy one year">
+        <img class="final-photo" src="./assets/1yrwings.png" alt="You eating wings across the table">
+        <div class="final-shade" aria-hidden="true"></div>
+        <div class="final-copy">
+          <p>after all of those wings...</p>
+          <h2>a year of wings.<br><em>a lifetime more.</em></h2>
+          <span>happy one year trisha &#9825;</span>
+          <button id="heart-button" type="button">tap me</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="book-controls" aria-label="Book navigation">
+    <button class="page-button" id="previous-page" type="button" aria-label="Previous page" disabled>&#8592;</button>
+    <div class="page-status">
+      <div class="dots" id="page-dots" aria-hidden="true"></div>
+      <span id="page-count">1 / 6</span>
+    </div>
+    <button class="page-button next-page" id="next-page" type="button" aria-label="Next page">next &#8594;</button>
+  </nav>
+
+  <p class="swipe-hint">swipe the card or use the arrows</p>
+  <div id="hearts" class="hearts" aria-hidden="true"></div>
+
+  <script src="one-year.js"></script>
+</body>
+</html>
