@@ -9,6 +9,8 @@ const musicButton = document.getElementById('music-button');
 const musicLabel = document.getElementById('music-label');
 const heartButton = document.getElementById('heart-button');
 const hearts = document.getElementById('hearts');
+const videoPage = document.querySelector('.video-page');
+const video = videoPage.querySelector('video');
 
 let currentPage = 0;
 let isTurning = false;
@@ -38,6 +40,7 @@ function finishTurn(oldPage, newPage) {
   pages.forEach((page, index) => page.setAttribute('aria-hidden', index === currentPage ? 'false' : 'true'));
   isTurning = false;
   updateControls();
+  leaveVideoBehind();
 }
 
 function goForward() {
@@ -52,6 +55,7 @@ function goForward() {
     pages[0].classList.add('is-active');
     pages[0].setAttribute('aria-hidden', 'false');
     updateControls();
+    leaveVideoBehind();
     return;
   }
 
@@ -98,23 +102,62 @@ book.addEventListener('touchend', (event) => {
   if (changeX > 0) goBack();
 }, { passive: true });
 
-async function toggleSong() {
-  if (song.paused) {
-    try {
-      await song.play();
-      musicButton.setAttribute('aria-pressed', 'true');
-      musicLabel.textContent = 'pause song';
-    } catch (error) {
-      musicLabel.textContent = 'tap again';
-    }
-  } else {
+song.addEventListener('play', () => {
+  musicButton.setAttribute('aria-pressed', 'true');
+  musicLabel.textContent = 'pause song';
+});
+
+song.addEventListener('pause', () => {
+  musicButton.setAttribute('aria-pressed', 'false');
+  musicLabel.textContent = 'play song';
+});
+
+function playSong() {
+  const started = song.play();
+  return started ? started.then(() => true, () => false) : Promise.resolve(true);
+}
+
+function toggleSong() {
+  if (!song.paused) {
     song.pause();
-    musicButton.setAttribute('aria-pressed', 'false');
-    musicLabel.textContent = 'play song';
+    return;
   }
+  songWaitingOnVideo = false;
+  playSong().then((started) => {
+    if (!started) musicLabel.textContent = 'tap again';
+  });
 }
 
 musicButton.addEventListener('click', toggleSong);
+
+const wakeEvents = ['pointerdown', 'keydown', 'touchstart'];
+
+function wakeSong(event) {
+  wakeEvents.forEach((name) => document.removeEventListener(name, wakeSong));
+  if (musicButton.contains(event.target)) return;
+  playSong();
+}
+
+playSong().then((started) => {
+  if (started) return;
+  wakeEvents.forEach((name) => document.addEventListener(name, wakeSong, { passive: true }));
+});
+
+let songWaitingOnVideo = false;
+
+video.addEventListener('play', () => {
+  if (song.paused) return;
+  songWaitingOnVideo = true;
+  song.pause();
+});
+
+function leaveVideoBehind() {
+  if (pages[currentPage] === videoPage) return;
+  video.pause();
+  if (!songWaitingOnVideo) return;
+  songWaitingOnVideo = false;
+  playSong();
+}
 
 function makeHearts() {
   heartButton.textContent = 'I love you';

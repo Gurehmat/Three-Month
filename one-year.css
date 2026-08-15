@@ -248,8 +248,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .photo-left img { object-position: 55% center; }
 .photo-right { width: 49%; height: 69%; right: 0; bottom: 0; transform: rotate(6deg); }
 .photo-right img { object-position: center 45%; }
-.tape { position: absolute; width: 69px; height: 21px; z-index: 3; background: rgba(205,180,143,.7); box-shadow: 0 1px 2px rgba(0,0,0,.09); }
-.tape-a { left: 14%; top: 7%; transform: rotate(-12deg); }
+.tape {
+  position: absolute;
+  width: 54px;
+  height: 18px;
+  z-index: 5;
+  background: linear-gradient(103deg, rgba(201,178,140,.62), rgba(241,229,203,.5) 42%, rgba(195,171,133,.66));
+  box-shadow: 0 1px 3px rgba(40,20,15,.15);
+  clip-path: polygon(4% 3%, 100% 0, 96% 100%, 0 96%);
+}
+
+.polaroid .tape { top: -9px; right: auto; bottom: auto; left: auto; }
+.photo-left .tape-a { left: 11%; transform: rotate(-8deg); }
+.photo-right .tape-c { right: 9%; transform: rotate(9deg); }
 .drawn-heart { position: absolute; z-index: 4; right: 40%; bottom: -3px; color: var(--wine); font: 36px Georgia, serif; transform: rotate(9deg); }
 
 .small-heading { margin: 9px 0 21px; font: italic 20px/1.2 Georgia, serif; color: var(--wine); }
@@ -261,7 +272,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .list-photo img { object-position: 50% 42%; }
 .list-scribble { position: absolute; bottom: 48px; left: 24px; width: 87px; transform: rotate(-7deg); }
 .list-scribble::after { content: ''; position: absolute; width: 45px; height: 20px; right: -31px; top: -5px; border-top: 1px solid currentColor; transform: rotate(18deg); }
-.tape-b { right: 23%; bottom: 32%; transform: rotate(-5deg); }
+.list-photo .tape-b { right: 12%; transform: rotate(7deg); }
 
 .dark-page {
   background: #29141a;
